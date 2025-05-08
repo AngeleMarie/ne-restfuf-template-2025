@@ -37,6 +37,7 @@
     "sequelize": "^6.37.5",
     "sequelize-cli": "^6.6.2",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "web3": "^4.16.0"
   }
 }

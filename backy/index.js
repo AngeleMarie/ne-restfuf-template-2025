@@ -32,6 +32,13 @@ app.use(cors({
   credentials: true
 }));
 
+morgan.token('id', function (req) {
+  return req.id || '-';
+});
+morgan.token('date', function () {
+  return new Date().toISOString();
+});
+
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
@@ -53,7 +60,10 @@ app.use(session({
   saveUninitialized: true,
 }));
 
-app.use(morgan())
+const logFormat = '[:date] :method :url :status :response-time ms - :res[content-length]';
+
+app.use(morgan(logFormat));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const __filename = fileURLToPath(import.meta.url);

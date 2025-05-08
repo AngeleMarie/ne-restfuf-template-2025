@@ -88,32 +88,41 @@ const Register = () => {
     setErrorMessage("");
     setSuccessMessage("");
   }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (
-      !valid.firstName ||
-      !valid.lastName ||
-      !valid.email ||
-      !valid.phoneNumber ||
-      !isPwdValid()
-    ) {
-      setErrorMessage("Please fill out the form correctly.");
+  
+    const invalidFields = [];
+  
+    if (!valid.firstName || !formData.firstName) {
+      invalidFields.push("First Name");
+    }
+    if (!valid.lastName || !formData.lastName) {
+      invalidFields.push("Last Name");
+    }
+    if (!valid.email || !formData.email) {
+      invalidFields.push("Email");
+    }
+    if (!valid.phoneNumber || !formData.phoneNumber) {
+      invalidFields.push("Phone Number");
+    }
+    if (!isPwdValid() || !formData.password) {
+      invalidFields.push("Password");
+    }
+  
+    if (invalidFields.length > 0) {
+      setErrorMessage(`Please fill out the following fields correctly: ${invalidFields.join(", ")}`);
       setSuccessMessage("");
       return;
     }
+  
     setLoading(true);
-
+  
     try {
       const response = await axiosInstance.post("/auth/register", formData);
       if (response.status === 201) {
         setSuccessMessage("Account created successfully! Redirecting...");
         setErrorMessage("");
-        setTimeout(
-          () => navigate("/verify", { state: { email: formData.email } }),
-          2000
-        );
+        setTimeout(() => navigate("/verify", { state: { email: formData.email } }), 2000);
       }
     } catch (error) {
       setErrorMessage(
@@ -121,7 +130,12 @@ const Register = () => {
       );
       setSuccessMessage("");
     }
+    finally {
+      setLoading(false);
+    }
   };
+  
+
 
   const togglePasswordVisibility = useCallback(() => {
     setShowPwd((prev) => !prev);

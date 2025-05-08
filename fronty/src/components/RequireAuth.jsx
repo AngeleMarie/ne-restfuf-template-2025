@@ -3,7 +3,6 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { jwtDecode } from "jwt-decode";
 
-
 function RequireAuth({ allowedRoles }) {
   const { auth } = useAuth();
   const location = useLocation();
@@ -11,13 +10,11 @@ function RequireAuth({ allowedRoles }) {
   let decoded;
   let roles = [];
 
-
   try {
     if (auth?.accessToken) {
       decoded = jwtDecode(auth.accessToken);
-      roles = [decoded?.role]; 
+      roles = [decoded?.role];
     }
-
   } catch (error) {
     console.error("Token decoding error:", error);
   }
@@ -25,12 +22,11 @@ function RequireAuth({ allowedRoles }) {
   const isAuthenticated = !!auth?.accessToken;
 
   return isAuthenticated ? (
-    roles.some(role => allowedRoles?.includes(role)) ? (
+    roles.some((role) => allowedRoles?.includes(role)) ? (
       <Outlet />
     ) : (
       <Navigate to="/unauthorized" state={{ from: location }} replace />
     )
-
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />
   );

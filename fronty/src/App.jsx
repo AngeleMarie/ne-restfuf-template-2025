@@ -3,14 +3,15 @@ import { Route, Routes } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/admin/Dashboard";
 import Users from "./pages/Users";
-import Settings from "./pages/Settings";
+import Settings from "./pages/admin/Settings";
 import Layout from "./components/Layout";
 import RequireAuth from "./components/RequireAuth";
 import Unauthorised from "./pages/Unauthorised";
 import PersistLogin from "./components/PersistLogin";
-import Store from './pages/Store';
+import Store from './pages/user/Store';
+import UserSettings from "./pages/user/Settings"
 import ResendCode from "./pages/ResendCode";
 import ResetPassword from "./pages/ResetPassword";
 import VerifyAccount from "./pages/VerifyAccount";
@@ -47,6 +48,8 @@ function App() {
 
           <Route element={<RequireAuth allowedRoles={[ROLES.ADMIN, ROLES.USER]} />}>
             <Route path="settings" element={<Settings />} />
+            <Route path="user-settings" element={<UserSettings />} />
+
           </Route>
         </Route>
       </Route>

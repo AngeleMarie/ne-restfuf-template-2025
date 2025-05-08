@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import TopBar from "../components/TopBar";
-import SideBar from "../components/SideBar";
+import TopBar from "../../components/TopBar";
+import SideBar from "./SideBar";
 import BorderColorOutlinedIcon from "@mui/icons-material/BorderColorOutlined";
 import EditIcon from "@mui/icons-material/Edit";
-import ProfileImage from "../assets/auth.png";
-import { axiosPrivate, BASE_URL } from "../api/axios";
+import ProfileImage from "../../assets/auth.png";
+import { axiosPrivate, BASE_URL } from "../../api/axios";
 
 function Profile() {
   const [user, setUser] = useState(null);

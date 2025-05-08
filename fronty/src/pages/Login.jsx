@@ -61,13 +61,21 @@ function Login() {
       );
   
       const { accessToken, user } = response.data;
-      setAuth({ user, accessToken: accessToken,role:user.role });
+      setAuth({ user, accessToken: accessToken, role: user.role });
       setEmail('');
       setPassword('');
-      navigate(from, { replace: true });
+  
+      // Redirect based on user role
+      if (user.role === 'admin') {
+        navigate('/dashboard', { replace: true });
+      } else {
+        navigate('/store', { replace: true });
+      }
+  
       localStorage.setItem('user', JSON.stringify(response.data.user));
       localStorage.setItem('accessToken', response.data.accessToken);
       localStorage.setItem('role', response.data.user.role);
+  
     } catch (error) {
       if (!error?.response) {
         setErrMsg('No Server Response');
@@ -91,6 +99,7 @@ function Login() {
       setLoading(false);
     }
   };
+  
   
   const togglePersist = () => {
     setPersist(prev => !prev);

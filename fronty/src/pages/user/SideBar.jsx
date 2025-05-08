@@ -4,29 +4,29 @@ import logo from "/mylogo.svg";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { axiosPrivate } from "../api/axios";
-import useAuth from "../hooks/useAuth"; // ← You forgot this!
+import { axiosPrivate } from "../../api/axios";
+import useAuth from "../../hooks/useAuth"; 
 
 function SideBar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { setAuth } = useAuth(); // ← You forgot this!
+  const { setAuth } = useAuth(); 
+
 
   const menuItems = [
-    { icon: <DashboardIcon />, text: "Dashboard", route: "/dashboard" },
-    { icon: <SettingsIcon />, text: "Settings", route: "/settings" },
+    { icon: <DashboardIcon />, text: "Store", route: "/store" },
+    { icon: <SettingsIcon />, text: "Settings", route: "/user-settings" },
   ];
 
   const handleLogout = async () => {
     try {
-      // Notify backend to clear refresh token cookie (invalidate session)
+
       await axiosPrivate.post("/auth/logout", null, {
-        withCredentials: true, // ← Important to send cookies!
+        withCredentials: true, 
       });
     } catch (error) {
       console.error("Logout error:", error);
     } finally {
-      // Clear local storage + auth context
       localStorage.removeItem("accessToken");
       localStorage.removeItem("persist");
       setAuth({});

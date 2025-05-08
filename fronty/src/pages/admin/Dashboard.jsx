@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { axiosPrivate } from '../api/axios'; // Import axiosPrivate
-import SideBar from '../components/SideBar';
-import TopBar from '../components/TopBar';
-import MetricCard from '../components/MetricCard';
-import Table from '../components/Table';
+import { axiosPrivate } from '../../api/axios'; // Import axiosPrivate
+import SideBar from './SideBar';
+import TopBar from '../../components/TopBar';
+import MetricCard from '../../components/MetricCard';
+import Table from '../../components/Table';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import PeopleIcon from '@mui/icons-material/People';
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
